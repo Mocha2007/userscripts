@@ -2,7 +2,7 @@
 // https://cookieclicker.fandom.com/wiki/Endless_cycle#Strategy
 
 // ready to ascend
-if (1 <= Game.ascendMeterLevel){
+if (Game.resets < 1000 && 1 <= Game.ascendMeterLevel){
 	Game.Ascend(1);
 	setTimeout(() => Game.Reincarnate(1), 6000); // needs about 6s to load
 }

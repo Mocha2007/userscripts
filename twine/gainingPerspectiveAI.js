@@ -2,8 +2,8 @@
 function ai(){
 	// todo: keep a tally of how many uncle credits you need versus how many you have
 	const t = 100; // ms; need time for the game to process clicks
-	const emergencyCreditAllocation = 5; // credits to take care of immediate health risks that may arise
-	let neededCredits = 11 + emergencyCreditAllocation;
+	const emergencyCreditAllocation = 10; // credits to take care of immediate health risks that may arise
+	let neededCredits = 12 + emergencyCreditAllocation;
 	function linkExists(s){
 		return Array.from(document.getElementsByTagName('tw-link'))
 			.find(e => e.innerHTML.includes(s));
@@ -51,6 +51,10 @@ function ai(){
 			neededCredits -= 1;
 		}
 		else if (elem = linkExists('Feeding Tube')){
+			elem.click();
+			neededCredits -= 1;
+		}
+		else if (elem = linkExists('Audio Communication Link')){
 			elem.click();
 			neededCredits -= 1;
 		}

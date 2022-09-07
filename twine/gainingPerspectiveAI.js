@@ -1,9 +1,19 @@
 // gaining perspective
 function ai(){
-	// todo: keep a tally of how many uncle credits you need versus how many you have
 	const t = 100; // ms; need time for the game to process clicks
 	const emergencyCreditAllocation = 10; // credits to take care of immediate health risks that may arise
 	let neededCredits = 12 + emergencyCreditAllocation;
+	let canDoStudy = true;
+	function enoughCredits(){
+		try {
+			const creditElement = Array.from(document.getElementsByTagName('b'))
+				.find(e => e.innerHTML === 'Uncle Credits:').parentElement.children[2].children[0];
+			return neededCredits < parseInt(creditElement.innerHTML);
+		}
+		catch (_){
+			return false;
+		}
+	}
 	function linkExists(s){
 		return Array.from(document.getElementsByTagName('tw-link'))
 			.find(e => e.innerHTML.includes(s));
@@ -19,8 +29,11 @@ function ai(){
 	function mainLoop(){
 		let elem;
 		// main gameplay
-		if (elem = onlyOption())
+		if (elem = onlyOption()){
+			if (canDoStudy && elem.innerHTML === 'Damn.')
+				canDoStudy = false;
 			elem.click();
+		}
 		// Paul credits
 		else if (elem = linkExists('(NEW)'))
 			elem.click();
@@ -58,16 +71,25 @@ function ai(){
 			elem.click();
 			neededCredits -= 1;
 		}
+		// waste credits on stuff
+		// Participate in medical study
+		// Meal Replacement and Caloric Supplements (1 credit)
+		else if (canDoStudy && enoughCredits() && (elem = linkExists('Call in Favor'))
+				|| (elem = linkExists('Participate in medical study'))
+				|| (elem = linkExists('Meal Replacement and Caloric Supplements')))
+			elem.click();
 		/*
 		else if (elem = linkExists('Sorry. Nothing, actually.')) // consider "Participate in medical study"
 			elem.click();
 		*/
 		// common decisions
-		// girlscouts - other options are "How many can you sell me?" and "*sigh*"
-		else if (elem = linkExists('No deal.'))
+		// girlscouts - other options are "No deal." and "*sigh*"
+		else if (elem = linkExists('How many can you sell me?'))
 			elem.click();
 		// girlscout begs - other option is "Fine, I'll take a couple boxes"
 		else if (elem = linkExists('Eugh.'))
+			elem.click();
+		else if (elem = linkExists('let her go.')) // alt: "bring the cookies down to you"
 			elem.click();
 		else if (elem = linkExists('Head over there'))
 			elem.click();
@@ -79,16 +101,30 @@ function ai(){
 			elem.click();
 		else if (elem = linkExists('You really want to head over there?'))
 			elem.click();
-		else if (elem = linkExists('You can probably still get up.')) // select "decline" here - more trouble than it's worth
-			linkExists('Decline').click();
+		else if (elem = linkExists('You can probably still get up.')){ // select "decline" here - more trouble than it's worth
+			if (!enoughCredits())
+				elem.click();
+			else
+				linkExists('Decline').click();
+		}
 		else if (elem = linkExists('See you tomorrow!'))
 			elem.click();
 		else if (elem = linkExists('No problem. I\'ll hang around.'))
 			elem.click();
-		else if (elem = linkExists('not today.')) // other option: "Yes. Yes. YES." (1 credit)
-			elem.click();
-		else if (elem = linkExists('Make yourself useful.')) // seems to be worthwhile, unlike previous option
-			elem.click();
+		else if (elem = linkExists('not today.')){
+			if (!enoughCredits())
+				elem.click();
+			else if (elem = linkExists('Yes. Yes. YES.'))
+				elem.click();
+			else
+				linkExists('Confirm another order.').click();
+		}
+		else if (elem = linkExists('Make yourself useful.')){ // seems to be worthwhile, unlike previous option
+			if (!enoughCredits())
+				elem.click();
+			else
+				linkExists('Decline').click();
+		}
 		else if (elem = linkExists('Not that thirsty.'))
 			elem.click();
 		else if (elem = linkExists('Sounds like a regrettable mistake in the making.'))

@@ -123,7 +123,7 @@ function ai(){
 			if (!enoughCredits())
 				elem.click();
 			else
-				linkExists('Decline').click();
+				linkExists('Refuse').click();
 		}
 		else if (elem = linkExists('Not that thirsty.'))
 			elem.click();

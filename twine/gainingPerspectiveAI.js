@@ -1,7 +1,7 @@
 // gaining perspective
 function ai(){
 	const t = 100; // ms; need time for the game to process clicks
-	const emergencyCreditAllocation = 10; // credits to take care of immediate health risks that may arise
+	const emergencyCreditAllocation = 15; // credits to take care of immediate health risks that may arise - 10 is apparently too low
 	let neededCredits = 12 + emergencyCreditAllocation;
 	let studyCooldown = 10;
 	function enoughCredits(){
@@ -130,6 +130,8 @@ function ai(){
 			elem.click();
 		// on verge of death
 		else if (elem = linkExists('seek medical assistance'))
+			elem.click();
+		else if (elem = linkExists('EMT'))
 			elem.click();
 		else if (elem = linkExists('One-time general health boost?'))
 			elem.click();

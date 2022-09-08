@@ -159,6 +159,8 @@ function ai(){
 		// milestones
 		else if (elem = linkExists('Make it happen. Keep my secret.')) // when to visit Paul
 			elem.click();
+		else if (elem = linkExists('Make it happen. Please keep my secret.')) // a variant? or is the first one wrong?
+			elem.click();
 		else if (elem = linkExists('You agree')) // alt: "You ask to maintain your 'normal' food intake."
 			elem.click();
 		// unknown event

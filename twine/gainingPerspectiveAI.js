@@ -118,6 +118,12 @@ function ai(){
 			else
 				linkExists('Confirm another order.').click();
 		}
+		else if (elem = linkExists('still no.')){
+			if (!enoughCredits())
+				elem.click();
+			else
+				linkExists('confirm the order.').click();
+		}
 		else if (elem = linkExists('Make yourself useful.')){ // seems to be worthwhile, unlike previous option
 			if (!enoughCredits())
 				elem.click();

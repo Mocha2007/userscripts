@@ -3,7 +3,7 @@ function ai(){
 	const t = 100; // ms; need time for the game to process clicks
 	const emergencyCreditAllocation = 10; // credits to take care of immediate health risks that may arise
 	let neededCredits = 12 + emergencyCreditAllocation;
-	let canDoStudy = true;
+	let studyCooldown = 10;
 	function enoughCredits(){
 		try {
 			const creditElement = Array.from(document.getElementsByTagName('b'))
@@ -27,11 +27,12 @@ function ai(){
 		return choices.length === 1 ? choices[0] : false;
 	}
 	function mainLoop(){
+		studyCooldown--;
 		let elem;
 		// main gameplay
 		if (elem = onlyOption()){
-			if (canDoStudy && elem.innerHTML === 'Damn.')
-				canDoStudy = false;
+			if (elem.innerHTML === 'Damn.')
+				studyCooldown = 10;
 			elem.click();
 		}
 		// Paul credits
@@ -55,7 +56,7 @@ function ai(){
 			elem.click();
 			neededCredits -= 1;
 		}
-		else if (elem = linkExists('Ventilator & Heart Monitor')){
+		else if (elem = linkExists('Ventilator')){
 			elem.click();
 			neededCredits -= 1;
 		}
@@ -74,14 +75,12 @@ function ai(){
 		// waste credits on stuff
 		// Participate in medical study
 		// Meal Replacement and Caloric Supplements (1 credit)
-		else if (canDoStudy && enoughCredits() && (elem = linkExists('Call in Favor'))
+		else if (studyCooldown < 0 && (enoughCredits() && (elem = linkExists('Call in Favor'))
 				|| (elem = linkExists('Participate in medical study'))
-				|| (elem = linkExists('Meal Replacement and Caloric Supplements')))
+				|| (elem = linkExists('Meal Replacement and Caloric Supplements'))))
 			elem.click();
-		/*
-		else if (elem = linkExists('Sorry. Nothing, actually.')) // consider "Participate in medical study"
+		else if (elem = linkExists('Sorry. Nothing, actually.'))
 			elem.click();
-		*/
 		// common decisions
 		// girlscouts - other options are "No deal." and "*sigh*"
 		else if (elem = linkExists('How many can you sell me?'))

@@ -54,8 +54,8 @@ function digit_cancellation(digits){
 			possible_cancellations.forEach(cancellation => {
 				const cn = +(numerator+"").replace(cancellation,"");
 				const cd = +(denominator+"").replace(cancellation,"");
-				// trivial case of ab0/cd0
-				if (+cancellation === 0 && cn*10 === numerator && cd*10 === denominator)
+				// trivial case of ab0/cd0 or a0b or c0d, maybe some false positives but idc
+				if (+cancellation === 0)
 					return;
 				// numerator/denominator === cn/cd
 				if (numerator*cd === denominator*cn)

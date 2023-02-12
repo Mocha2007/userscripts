@@ -35,7 +35,7 @@ function digit_cancellation(digits){
 		const o = [];
 		n1f.forEach(factor => {
 			for (let i = 1; factor*i < n; i++){
-				if (digit_lower <= factor*i && factor*i < digit_upper)
+				if (digit_lower <= factor*i && factor*i < digit_upper && !o.includes(factor*i))
 					o.push(factor*i);
 			}
 		});

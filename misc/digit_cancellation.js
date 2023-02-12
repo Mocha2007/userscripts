@@ -30,7 +30,6 @@ function non_one_factors(n){
 }
 
 function digit_cancellation(digits){
-	// this function is broken somehow...
 	function mon1f(n){
 		const n1f = non_one_factors(n);
 		const o = [];
@@ -58,7 +57,6 @@ function digit_cancellation(digits){
 				// trivial case of ab0/cd0
 				if (+cancellation === 0 && cn*10 === numerator && cd*10 === denominator)
 					return;
-				// continue
 				// numerator/denominator === cn/cd
 				if (numerator*cd === denominator*cn)
 					console.log(`${numerator} / ${denominator} === ${cn} / ${cd}`);

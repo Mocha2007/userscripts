@@ -36,7 +36,7 @@ function digit_cancellation(digits){
 		const o = [];
 		n1f.forEach(factor => {
 			for (let i = 1; factor*i < n; i++){
-				if (digit_lower <= factor*i && factor.i < digit_upper)
+				if (digit_lower <= factor*i && factor*i < digit_upper)
 					o.push(factor*i);
 			}
 		});
@@ -49,11 +49,16 @@ function digit_cancellation(digits){
 		// THUS we must consider only the multiples of its non-1 factors between the bounds
 		const possible_numerators = mon1f(denominator);
 		const possible_cancellations = (denominator + "").split("");
-		debugger;
 		possible_numerators.forEach(numerator => {
+			if (numerator === denominator)
+				return; // trivial
 			possible_cancellations.forEach(cancellation => {
-				const cn = +numerator.replace(cancellation,"");
-				const cd = +denominator.replace(cancellation,"");
+				const cn = +(numerator+"").replace(cancellation,"");
+				const cd = +(denominator+"").replace(cancellation,"");
+				// trivial case of ab0/cd0
+				if (+cancellation === 0 && cn*10 === numerator && cd*10 === denominator)
+					return;
+				// continue
 				// numerator/denominator === cn/cd
 				if (numerator*cd === denominator*cn)
 					console.log(`${numerator} / ${denominator} === ${cn} / ${cd}`);

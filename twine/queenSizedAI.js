@@ -72,7 +72,11 @@ function ai(){
 			elem.click();
 		else if (elem = linkExists('Continue Holding Court'))
 			elem.click();
+		else if (elem = linkExists('Give the Commander the money'))
+			elem.click();
 		else if (elem = linkExists('Help fix the Cathedral'))
+			elem.click();
+		else if (elem = linkExists('Send aid to the village'))
 			elem.click();
 		else if (elem = linkExists('Organize your Royal Court'))
 			adjourned = true;

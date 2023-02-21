@@ -1,7 +1,7 @@
 // Queen Sized
 function ai(){
 	const t = 1000; // ms; need time for the game to process clicks
-	let eatenToday, needNewChair, needNewDoor, learnedAll, conjured, adjourned;
+	let eatenToday = needNewChair = needNewDoor = learnedAll = conjured = adjourned = false;
 	function linkExists(s){
 		return Array.from(document.getElementsByClassName('link-internal'))
 			.find(e => e.innerHTML.includes(s));
@@ -80,9 +80,13 @@ function ai(){
 			elem.click();
 		else if (elem = linkExists('Help fix the Cathedral'))
 			elem.click();
+		else if (elem = linkExists('Hire Madeleine'))
+			elem.click();
 		else if (elem = linkExists('Send aid to the village'))
 			elem.click();
 		else if (elem = linkExists('Test the Potion')) // I may need to test data-passage to see if this is safe or not...
+			elem.click();
+		else if (elem = linkExists('Yes, please'))
 			elem.click();
 		else if (elem = linkExists('Organize your Royal Court')){
 			adjourned = true;

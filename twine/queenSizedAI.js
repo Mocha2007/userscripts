@@ -14,7 +14,6 @@ function ai(){
 		return choices.length === 1 ? choices[0] : false;
 	}
 	function mainLoop(){
-		studyCooldown--;
 		let elem;
 		// main gameplay
 		if (elem = onlyOption())

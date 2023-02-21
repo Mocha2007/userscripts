@@ -23,35 +23,39 @@ function ai(){
 				needNewChair = true;
 			elem.click();
 		}
-		// options
+		// misc
 		else if (elem = linkExists('Back')) // exit whatever menu you're in
 			elem.click();
 		else if (elem = linkExists('Sleep')){
 			elem.click();
 			eatenToday = false;
 		}
+		// Upgrade Menu
 		else if (needNewChair && (elem = linkExists('Upgrades')))
 			elem.click();
 		else if (needNewChair && (elem = linkExists('Get larger Chairs'))){
 			elem.click();
 			needNewChair = false;
 		}
+		// Dining Menu
 		else if (!needNewChair && !eatenToday && (elem = linkExists('Dining')))
 			elem.click();
 		else if (elem = linkExists('Have a meal')){
 			elem.click();
 			eatenToday = true;
 		}
+		// Library Menu
 		else if (elem = linkExists('Library'))
 			elem.click();
 		else if (elem = linkExists('Learn how to read'))
 			elem.click();
-		else if (elem = linkExists('Maybe learn about Sorcery?'))
+		else if (elem = linkExists('about Sorcery'))
 			elem.click();
 		else if (elem = linkExists('Read the incantation aloud'))
 			elem.click();
 		else if (elem = linkExists('Learn how to conjure gold'))
 			elem.click();
+		// misc
 		// if can't do anything else, leave...
 		else if (elem = linkExists('Leave')){
 			elem.click();

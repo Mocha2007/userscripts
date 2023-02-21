@@ -18,7 +18,8 @@ function ai(){
 		let elem;
 		// main gameplay
 		if (elem = onlyOption()){
-			if (document.getElementById('passage-enter-the-dining-hall').innerHTML.includes('new chair'))
+			let newChairElem = document.getElementById('passage-enter-the-dining-hall');
+			if (newChairElem && newChairElem.innerHTML.includes('new chair'))
 				needNewChair = true;
 			elem.click();
 		}

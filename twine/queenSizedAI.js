@@ -108,6 +108,9 @@ function ai(){
 		}
 		else if (elem = linkExists('Large Meal'))
 			elem.click();
+		// no other activities available today...
+		else if (elem = linkExists('Procrastinate'))
+			elem.click();
 		// misc
 		// if can't do anything else, leave...
 		else if (elem = linkExists('Leave')){

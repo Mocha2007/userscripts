@@ -3,6 +3,7 @@ function ai(){
 	const t = 1000; // ms; need time for the game to process clicks
 	let eatenToday = false;
 	let needNewChair = false;
+	let needNewDoor = false;
 	function linkExists(s){
 		return Array.from(document.getElementsByClassName('link-internal'))
 			.find(e => e.innerHTML.includes(s));
@@ -31,11 +32,15 @@ function ai(){
 			eatenToday = false;
 		}
 		// Upgrade Menu
-		else if (needNewChair && (elem = linkExists('Upgrades')))
+		else if ((needNewChair || needNewDoor) && (elem = linkExists('Upgrades')))
 			elem.click();
 		else if (needNewChair && (elem = linkExists('Get larger Chairs'))){
 			elem.click();
 			needNewChair = false;
+		}
+		else if (needNewDoor && (elem = linkExists('XXX'))){
+			elem.click();
+			needNewDoor = false;
 		}
 		// Dining Menu
 		else if (!needNewChair && !eatenToday && (elem = linkExists('Dining')))
@@ -63,8 +68,13 @@ function ai(){
 		}
 		// unknown event
 		else {
-			clearInterval(interval);
-			console.error('unknown event; handing control back to player');
+			let needDoorElem = document.getElementById('passage-dashboard1');
+			if (needDoorElem && needDoorElem.innerHTML.includes(''))
+				needNewDoor = true;
+			else {
+				clearInterval(interval);
+				console.error('unknown event; handing control back to player');
+			}
 		}
 	}
 	const interval = setInterval(mainLoop, t);

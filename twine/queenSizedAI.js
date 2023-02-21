@@ -31,7 +31,7 @@ function ai(){
 			conjured = false;
 			adjourned = false;
 		}
-		else if (elem = linkExists('Have some biscuits')) // Madeleine randomly does this when you leave a room...
+		else if (elem = linkExists('Have some ')) // Madeleine randomly does this when you leave a room...
 			elem.click();
 		// Upgrade Menu
 		else if ((needNewChair || needNewDoor) && (elem = linkExists('Upgrades')))
@@ -118,7 +118,6 @@ function ai(){
 			else {
 				clearInterval(interval);
 				console.error('unknown event; handing control back to player');
-				debugger;
 			}
 		}
 	}

@@ -4,6 +4,7 @@ function ai(){
 	const emergencyCreditAllocation = 15; // credits to take care of immediate health risks that may arise - 10 is apparently too low
 	let neededCredits = 12 + emergencyCreditAllocation;
 	let studyCooldown = 10;
+	let neededCookies = 3; // https://forum.weightgaming.com/t/quick-start-guide/1444
 	function enoughCredits(){
 		try {
 			const creditElement = Array.from(document.getElementsByTagName('b'))
@@ -25,6 +26,10 @@ function ai(){
 		const choices = Array.from(document.getElementsByTagName('tw-link'))
 			.filter(e => !badChoices.includes(e.innerHTML));
 		return choices.length === 1 ? choices[0] : false;
+	}
+	function weight(){
+		return +Array.from(document.getElementsByTagName('tw-expression'))
+			.filter(e => !isNaN(+e.innerHTML) && 200 < +e.innerHTML)[0].innerHTML;
 	}
 	function mainLoop(){
 		studyCooldown--;
@@ -82,8 +87,8 @@ function ai(){
 		else if (elem = linkExists('Sorry. Nothing, actually.'))
 			elem.click();
 		// common decisions
-		// girlscouts - other options are "No deal." and "*sigh*"
-		else if (elem = linkExists('How many can you sell me?'))
+		// girlscouts - other options are "How many can you sell me?" and "*sigh*"
+		else if (elem = linkExists('No deal.'))
 			elem.click();
 		// girlscout begs - other option is "Fine, I'll take a couple boxes"
 		else if (elem = linkExists('Eugh.'))
@@ -111,12 +116,16 @@ function ai(){
 		else if (elem = linkExists('No problem. I\'ll hang around.'))
 			elem.click();
 		else if (elem = linkExists('not today.')){
-			if (!enoughCredits())
+			if (!enoughCredits() || neededCookies === 0 || 1500 <= weight())
 				elem.click();
-			else if (elem = linkExists('Yes. Yes. YES.'))
+			else if (elem = linkExists('Yes. Yes. YES.')){
 				elem.click();
-			else
+				neededCookies--;
+			}
+			else {
 				linkExists('Confirm another order.').click();
+				neededCookies--;
+			}
 		}
 		else if (elem = linkExists('still no.')){
 			if (!enoughCredits())

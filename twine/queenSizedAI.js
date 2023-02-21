@@ -1,7 +1,8 @@
 // gaining perspective
 function ai(){
-	const t = 100; // ms; need time for the game to process clicks
+	const t = 1000; // ms; need time for the game to process clicks
 	let eatenToday = false;
+	let needNewChair = false;
 	function linkExists(s){
 		return Array.from(document.getElementsByClassName('link-internal'))
 			.find(e => e.innerHTML.includes(s));
@@ -16,14 +17,25 @@ function ai(){
 	function mainLoop(){
 		let elem;
 		// main gameplay
-		if (elem = onlyOption())
+		if (elem = onlyOption()){
+			if (document.getElementById('passage-enter-the-dining-hall').innerHTML.includes('new chair'))
+				needNewChair = true;
 			elem.click();
+		}
 		// options
+		else if (elem = linkExists('Back')) // exit whatever menu you're in
+			elem.click();
 		else if (elem = linkExists('Sleep')){
 			elem.click();
 			eatenToday = false;
 		}
-		else if (!eatenToday && (elem = linkExists('Dining')))
+		else if (needNewChair && (elem = linkExists('Upgrades'))
+			elem.click();
+		else if (needNewChair && (elem = linkExists('Get larger Chairs')){
+			elem.click();
+			needNewChair = false;
+		}
+		else if (!needNewChair && !eatenToday && (elem = linkExists('Dining')))
 			elem.click();
 		else if (elem = linkExists('Have a meal')){
 			elem.click();

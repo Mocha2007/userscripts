@@ -1,6 +1,6 @@
 // gaining perspective
 function ai(){
-	const t = 100; // ms; need time for the game to process clicks
+	const t = 1000; // ms; need time for the game to process clicks
 	let eatenToday = false;
 	function linkExists(s){
 		return Array.from(document.getElementsByClassName('link-internal'))
@@ -34,8 +34,10 @@ function ai(){
 		else if (elem = linkExists('Learn how to read'))
 			elem.click();
 		// if can't do anything else, leave...
-		else if (elem = linkExists('Leave'))
+		else if (elem = linkExists('Leave')){
 			elem.click();
+			eatenToday = true;
+		}
 		// unknown event
 		else {
 			clearInterval(interval);

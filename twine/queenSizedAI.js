@@ -29,9 +29,9 @@ function ai(){
 			elem.click();
 			eatenToday = false;
 		}
-		else if (needNewChair && (elem = linkExists('Upgrades'))
+		else if (needNewChair && (elem = linkExists('Upgrades')))
 			elem.click();
-		else if (needNewChair && (elem = linkExists('Get larger Chairs')){
+		else if (needNewChair && (elem = linkExists('Get larger Chairs'))){
 			elem.click();
 			needNewChair = false;
 		}

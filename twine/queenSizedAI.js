@@ -24,7 +24,7 @@ function ai(){
 			elem.click();
 			eatenToday = false;
 		}
-		else if (!eatenToday && elem = linkExists('Dining'))
+		else if (!eatenToday && (elem = linkExists('Dining')))
 			elem.click();
 		else if (elem = linkExists('Have a meal')){
 			elem.click();

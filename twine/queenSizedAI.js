@@ -1,6 +1,6 @@
 // Queen Sized
 function ai(){
-	const t = 1000; // ms; need time for the game to process clicks
+	const t = 100; // ms; need time for the game to process clicks
 	let eatenToday = needNewChair = needNewDoor = learnedAll = conjured = adjourned = false;
 	function linkExists(s){
 		return Array.from(document.getElementsByClassName('link-internal'))

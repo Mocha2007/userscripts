@@ -166,8 +166,8 @@ function ai(){
 		else if (elem = linkExists('continue')) // non-critical medical issue
 			elem.click();
 		// starting a new game
-		else if (elem = linkExists('New Game')) // main menu
-			elem.click();
+		else if (elem = linkExists('Load Game')) // main menu - can't directly test New Game because the end screen says that, too
+			linkExists('New Game').click();
 		else if (elem = linkExists('Woman')) // gender
 			elem.click();
 		else if (elem = linkExists('Have some toast and cereal')) // what to eat for breakfast

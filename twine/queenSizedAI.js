@@ -72,14 +72,22 @@ function ai(){
 			elem.click();
 		else if (elem = linkExists('Continue Holding Court'))
 			elem.click();
+		else if (elem = linkExists('Conscript a large Army to invade'))
+			elem.click();
+		else if (elem = linkExists('Fund Annette\'s Laboratory'))
+			elem.click();
 		else if (elem = linkExists('Give the Commander the money'))
 			elem.click();
 		else if (elem = linkExists('Help fix the Cathedral'))
 			elem.click();
 		else if (elem = linkExists('Send aid to the village'))
 			elem.click();
-		else if (elem = linkExists('Organize your Royal Court'))
+		else if (elem = linkExists('Test the Potion')) // I may need to test data-passage to see if this is safe or not...
+			elem.click();
+		else if (elem = linkExists('Organize your Royal Court')){
 			adjourned = true;
+			linkExists('Leave').click();
+		}
 		// Dining Menu
 		else if (!needNewChair && !eatenToday && (elem = linkExists('Dining')))
 			elem.click();
@@ -98,7 +106,7 @@ function ai(){
 		// unknown event
 		else {
 			const needDoorElem = document.getElementById('passage-dashboard1');
-			if (needDoorElem && needDoorElem.innerHTML.includes(''))
+			if (needDoorElem && needDoorElem.innerHTML.includes('new chair'))
 				needNewDoor = true;
 			else {
 				clearInterval(interval);

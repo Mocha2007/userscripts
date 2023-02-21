@@ -89,6 +89,8 @@ function ai(){
 			elem.click();
 		else if (elem = linkExists('Hire Madeleine'))
 			elem.click();
+		else if (elem = linkExists('Let the Church have their Crusade'))
+			elem.click();
 		else if (elem = linkExists('Send aid to the village'))
 			elem.click();
 		else if (elem = linkExists('Test the Potion')) // I may need to test data-passage to see if this is safe or not...

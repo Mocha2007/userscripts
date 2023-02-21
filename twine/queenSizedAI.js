@@ -1,4 +1,4 @@
-// gaining perspective
+// Queen Sized
 function ai(){
 	const t = 1000; // ms; need time for the game to process clicks
 	let eatenToday = false;

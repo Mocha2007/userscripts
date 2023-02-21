@@ -41,11 +41,15 @@ function ai(){
 		// Upgrade Menu
 		else if ((needNewChair || needNewDoor) && (elem = linkExists('Upgrades')))
 			elem.click();
-		else if (needNewChair && (elem = linkExists('Get larger Chairs'))){
+		else if (elem = linkExists('Get even larger Chairs')){
 			elem.click();
 			needNewChair = false;
 		}
-		else if (needNewDoor && (elem = linkExists('Widen your Doors'))){
+		else if (elem = linkExists('Get larger Chairs')){
+			elem.click();
+			needNewChair = false;
+		}
+		else if (elem = linkExists('Widen your Doors')){
 			elem.click();
 			needNewDoor = false;
 		}

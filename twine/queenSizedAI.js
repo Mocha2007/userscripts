@@ -46,6 +46,12 @@ function ai(){
 			elem.click();
 		else if (elem = linkExists('Learn how to read'))
 			elem.click();
+		else if (elem = linkExists('Maybe learn about Sorcery?'))
+			elem.click();
+		else if (elem = linkExists('Read the incantation aloud'))
+			elem.click();
+		else if (elem = linkExists('Learn how to conjure gold'))
+			elem.click();
 		// if can't do anything else, leave...
 		else if (elem = linkExists('Leave')){
 			elem.click();

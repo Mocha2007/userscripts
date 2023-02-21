@@ -1,11 +1,7 @@
 // Queen Sized
 function ai(){
 	const t = 1000; // ms; need time for the game to process clicks
-	let eatenToday = false;
-	let needNewChair = false;
-	let needNewDoor = false;
-	let learnedAll = false;
-	let conjured = false;
+	let eatenToday, needNewChair, needNewDoor, learnedAll, conjured, adjourned;
 	function linkExists(s){
 		return Array.from(document.getElementsByClassName('link-internal'))
 			.find(e => e.innerHTML.includes(s));
@@ -33,6 +29,7 @@ function ai(){
 			elem.click();
 			eatenToday = false;
 			conjured = false;
+			adjourned = false;
 		}
 		// Upgrade Menu
 		else if ((needNewChair || needNewDoor) && (elem = linkExists('Upgrades')))
@@ -50,7 +47,7 @@ function ai(){
 			elem.click();
 		else if (elem = linkExists('Learn how to read'))
 			elem.click();
-		else if (elem = linkExists('about Sorcery'))
+		else if (!conjured && (elem = linkExists('about Sorcery')))
 			elem.click();
 		else if (elem = linkExists('Read the incantation aloud'))
 			elem.click();
@@ -68,6 +65,17 @@ function ai(){
 			elem.click();
 			learnedAll = true;
 		}
+		// Throneroom Menu
+		else if (!adjourned && (elem = linkExists('Go to the Throne Room')))
+			elem.click();
+		else if (elem = linkExists('Hold Court'))
+			elem.click();
+		else if (elem = linkExists('Continue Holding Court'))
+			elem.click();
+		else if (elem = linkExists('Help fix the Cathedral'))
+			elem.click();
+		else if (elem = linkExists('Organize your Royal Court'))
+			adjourned = true;
 		// Dining Menu
 		else if (!needNewChair && !eatenToday && (elem = linkExists('Dining')))
 			elem.click();
@@ -76,11 +84,6 @@ function ai(){
 			eatenToday = true;
 		}
 		else if (elem = linkExists('Large Meal'))
-			elem.click();
-		// Throneroom Menu
-		else if (elem = linkExists('Go to the Throne Room'))
-			elem.click();
-		else if (elem = linkExists('Hold Court'))
 			elem.click();
 		// misc
 		// if can't do anything else, leave...

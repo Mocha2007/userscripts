@@ -42,13 +42,6 @@ function ai(){
 			elem.click();
 			needNewDoor = false;
 		}
-		// Dining Menu
-		else if (!needNewChair && !eatenToday && (elem = linkExists('Dining')))
-			elem.click();
-		else if (elem = linkExists('Have a meal')){
-			elem.click();
-			eatenToday = true;
-		}
 		// Library Menu
 		else if (elem = linkExists('Library'))
 			elem.click();
@@ -60,6 +53,20 @@ function ai(){
 			elem.click();
 		else if (elem = linkExists('Learn how to conjure gold'))
 			elem.click();
+		// Dining Menu
+		else if (!needNewChair && !eatenToday && (elem = linkExists('Dining')))
+			elem.click();
+		else if (elem = linkExists('Have a meal')){
+			elem.click();
+			eatenToday = true;
+		}
+		else if (elem = linkExists('Large Meal'))
+			elem.click();
+		// Throneroom Menu
+		else if (elem = linkExists('Go to the Throne Room'))
+			elem.click();
+		else if (elem = linkExists('Hold Court'))
+			elem.click();
 		// misc
 		// if can't do anything else, leave...
 		else if (elem = linkExists('Leave')){
@@ -68,7 +75,7 @@ function ai(){
 		}
 		// unknown event
 		else {
-			let needDoorElem = document.getElementById('passage-dashboard1');
+			const needDoorElem = document.getElementById('passage-dashboard1');
 			if (needDoorElem && needDoorElem.innerHTML.includes(''))
 				needNewDoor = true;
 			else {

@@ -93,6 +93,8 @@ function ai(){
 			elem.click();
 		else if (elem = linkExists('Hire Madeleine'))
 			elem.click();
+		else if (elem = linkExists('Keep the land in the hands of the Crown')) // is this really the best option?
+			elem.click();
 		else if (elem = linkExists('Let the Church have their Crusade'))
 			elem.click();
 		else if (elem = linkExists('Send aid to the village'))

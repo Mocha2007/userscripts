@@ -31,7 +31,12 @@ function ai(){
 			conjured = false;
 			adjourned = false;
 		}
-		else if (elem = linkExists('Have some ')) // Madeleine randomly does this when you leave a room...
+		// Madeleine randomly does these when you leave a room...
+		else if (elem = linkExists('Have a sweetroll'))
+			elem.click();
+		else if (elem = linkExists('Have some biscuits')) 
+			elem.click();
+		else if (elem = linkExists('Have some cookies'))
 			elem.click();
 		// Upgrade Menu
 		else if ((needNewChair || needNewDoor) && (elem = linkExists('Upgrades')))

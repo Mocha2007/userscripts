@@ -1,6 +1,7 @@
 // gaining perspective
 function ai(){
 	const t = 100; // ms; need time for the game to process clicks
+	let eatenToday = false;
 	function linkExists(s){
 		return Array.from(document.getElementsByClassName('link-internal'))
 			.find(e => e.innerHTML.includes(s));
@@ -19,10 +20,23 @@ function ai(){
 		if (elem = onlyOption())
 			elem.click();
 		// options
-		/*
-		else if (elem = linkExists('(NEW)'))
+		else if (elem = linkExists('Sleep')){
 			elem.click();
-		*/
+			eatenToday = false;
+		}
+		else if (!eatenToday && elem = linkExists('Dining'))
+			elem.click();
+		else if (elem = linkExists('Have a meal')){
+			elem.click();
+			eatenToday = true;
+		}
+		else if (elem = linkExists('Library'))
+			elem.click();
+		else if (elem = linkExists('Learn how to read'))
+			elem.click();
+		// if can't do anything else, leave...
+		else if (elem = linkExists('Leave'))
+			elem.click();
 		// unknown event
 		else {
 			clearInterval(interval);

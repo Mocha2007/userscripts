@@ -80,9 +80,10 @@ function ai(){
 		// waste credits on stuff
 		// Participate in medical study
 		// Meal Replacement and Caloric Supplements (1 credit)
-		else if (studyCooldown < 0 && (enoughCredits() && (elem = linkExists('Call in Favor'))
-				|| (elem = linkExists('Participate in medical study'))
-				|| (elem = linkExists('Meal Replacement and Caloric Supplements'))))
+		else if (studyCooldown < 0 && enoughCredits() && neededCookies === 0 // if we still need cookies, hold off on this...
+				&& (elem = linkExists('Call in Favor')
+					|| (elem = linkExists('Participate in medical study'))
+					|| (elem = linkExists('Meal Replacement and Caloric Supplements'))))
 			elem.click();
 		else if (elem = linkExists('Sorry. Nothing, actually.'))
 			elem.click();
@@ -93,8 +94,12 @@ function ai(){
 		// girlscout begs - other option is "Fine, I'll take a couple boxes"
 		else if (elem = linkExists('Eugh.'))
 			elem.click();
-		else if (elem = linkExists('let her go.')) // alt: "bring the cookies down to you"
-			elem.click();
+		else if (elem = linkExists('let her go.')){ // alt: "bring the cookies down to you"
+			if (0 < neededCookies)
+				elem.click();
+			else
+				linkExists('bring the cookies down to you').click();
+		}
 		else if (elem = linkExists('Head over there'))
 			elem.click();
 		else if (elem = linkExists('No problem. Be there shortly.'))
@@ -115,7 +120,7 @@ function ai(){
 			elem.click();
 		else if (elem = linkExists('No problem. I\'ll hang around.'))
 			elem.click();
-		else if (elem = linkExists('not today.')){
+		else if ((elem = linkExists('not today.')) || (elem = linkExists('Not happening.'))){ // the second is after Donna
 			if (!enoughCredits() || neededCookies === 0 || 1500 <= weight())
 				elem.click();
 			else if (elem = linkExists('Yes. Yes. YES.')){
@@ -139,8 +144,12 @@ function ai(){
 			else
 				linkExists('Refuse').click();
 		}
-		else if (elem = linkExists('Not that thirsty.'))
-			elem.click();
+		else if (elem = linkExists('Not that thirsty.')){ // todo: only choose this if weight < 1500
+			if (0 < neededCookies)
+				elem.click();
+			else
+				linkExists('slurp').click();
+		}
 		else if (elem = linkExists('Sounds like a regrettable mistake in the making.'))
 			elem.click();
 		// on verge of death
@@ -172,6 +181,18 @@ function ai(){
 			elem.click();
 		else if (elem = linkExists('You agree')) // alt: "You ask to maintain your 'normal' food intake."
 			elem.click();
+		else if (elem = linkExists('hang around')) // Donna
+			elem.click();
+		else if (elem = linkExists('Let her send the application.')) // Donna good ending
+			elem.click();
+		else if (elem = linkExists('Assure her')) // Donna - idk if this one matters
+			elem.click();
+		else if (elem = linkExists('Take the cash')){
+			if (!enoughCredits())
+				elem.click();
+			else
+				linkExists('Take the snacks').click();
+		}
 		// unknown event
 		else if (Array.from(document.getElementsByTagName('tw-link')).length) {
 			clearInterval(interval);

@@ -106,7 +106,7 @@ function ai(){
 		// unknown event
 		else {
 			const needDoorElem = document.getElementById('passage-dashboard1');
-			if (needDoorElem && needDoorElem.innerHTML.includes('new chair'))
+			if (needDoorElem && needDoorElem.innerHTML.includes('new door'))
 				needNewDoor = true;
 			else {
 				clearInterval(interval);

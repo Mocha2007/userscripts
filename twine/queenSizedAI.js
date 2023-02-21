@@ -4,6 +4,8 @@ function ai(){
 	let eatenToday = false;
 	let needNewChair = false;
 	let needNewDoor = false;
+	let learnedAll = false;
+	let conjured = false;
 	function linkExists(s){
 		return Array.from(document.getElementsByClassName('link-internal'))
 			.find(e => e.innerHTML.includes(s));
@@ -30,6 +32,7 @@ function ai(){
 		else if (elem = linkExists('Sleep')){
 			elem.click();
 			eatenToday = false;
+			conjured = false;
 		}
 		// Upgrade Menu
 		else if ((needNewChair || needNewDoor) && (elem = linkExists('Upgrades')))
@@ -38,12 +41,12 @@ function ai(){
 			elem.click();
 			needNewChair = false;
 		}
-		else if (needNewDoor && (elem = linkExists('XXX'))){
+		else if (needNewDoor && (elem = linkExists('Widen your Doors'))){
 			elem.click();
 			needNewDoor = false;
 		}
 		// Library Menu
-		else if (elem = linkExists('Library'))
+		else if ((!learnedAll || !conjured) && (elem = linkExists('Library')))
 			elem.click();
 		else if (elem = linkExists('Learn how to read'))
 			elem.click();
@@ -53,12 +56,18 @@ function ai(){
 			elem.click();
 		else if (elem = linkExists('Learn how to conjure gold'))
 			elem.click();
-		else if (elem = linkExists('Conjure gold'))
+		else if (elem = linkExists('Conjure gold')){
 			elem.click();
+			conjured = true;
+		}
 		else if (elem = linkExists('Learn how to decrease weight'))
 			elem.click();
 		else if (elem = linkExists('Learn how to increase weight'))
 			elem.click();
+		else if (elem = linkExists('Finish Reading')){
+			elem.click();
+			learnedAll = true;
+		}
 		// Dining Menu
 		else if (!needNewChair && !eatenToday && (elem = linkExists('Dining')))
 			elem.click();

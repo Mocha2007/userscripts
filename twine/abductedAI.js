@@ -132,6 +132,8 @@ function ai(){
 			elem.click();
 		else if (elem = linkExists('Your body has already'))
 			elem.click();
+		else if (elem = linkExists('Help out'))
+			elem.click();
 		// unknown event
 		else
 			halt();

@@ -2,7 +2,7 @@
 function ai(){
 	// SugarCube.State.current
 	const t = 200; // ms; need time for the game to process clicks
-	let cafeRejectedToday = eatenToday = weighedToday = false;
+	let abbi = cafeRejectedToday = eatenToday = weighedToday = false;
 	function linkExists(s){
 		return Array.from(document.getElementsByClassName('link-internal'))
 			.find(e => e.innerHTML.includes(s));
@@ -84,6 +84,21 @@ function ai(){
 		}
 		else if (elem = linkExists('Leave Bathroom'))
 			elem.click();
+		// OwO WHAT'S THIS???
+		else if (elem = linkExists('Check on ABBI'))
+			elem.click();
+		else if (!abbi && (elem = linkExists('Repair ABBI')))
+			elem.click();
+		else if (elem = linkExists('abbi')) // puzzle
+			Array.from(document.getElementById('passages').children[0].children)
+				.find(e => e.dataset.passage && e.dataset.passage.includes('correct'))
+				.click();
+		else if (elem = linkExists('messages'))
+			elem.click();
+		else if (elem = linkExists('Next')){
+			elem.click();
+			abbi = true;
+		}
 		// Explore!
 		else if (elem = linkExists('Leave Room'))
 			elem.click();

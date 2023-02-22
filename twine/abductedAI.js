@@ -132,6 +132,11 @@ function ai(){
 		// Explore! (chapter 3)
 		else if (elem = linkExists('Wander around the Facility\'s surrounding forest'))
 			elem.click();
+		else if (elem = linkExists('Approach the creature'))
+			elem.click();
+		else if (elem = linkExists('Stand your ground')) // treant feeding
+			elem.click();
+		// NOT WORTH IT: eating the fruit: 1/3 change of 6.6r food, 1/6 chance of 33.3r food, 1/3 chance of basically nothing, 1/6 chance of cap malus
 		// Explore! (chapter 2)
 		else if (elem = linkExists('Take a look inside'))
 			elem.click();

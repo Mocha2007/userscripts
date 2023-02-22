@@ -17,7 +17,7 @@ function ai(){
 	function halt(){
 		clearInterval(interval);
 		console.error('unknown event; handing control back to player');
-		debugger;
+		// debugger;
 	}
 	function maxFridgeCal(){
 		const cap = SugarCube.State.current.variables.cap;
@@ -52,8 +52,11 @@ function ai(){
 			const no = linkExists('No');
 			// hold on we need to figure out what we're agreeing to...
 			switch (parent.id){
-				case 'passage-wander-around':
-					elem.click();
+				case 'passage-wander-around': // burns eu cals but adds 1 to help
+					if (SugarCube.State.current.variables.helptot < 6) // we need 6 to unlock cafeteria
+						elem.click();
+					else
+						no.click();
 					break;
 				default:
 					halt();
@@ -64,7 +67,7 @@ function ai(){
 			//set $cal to 10*($cap/2) - $eu
 			const cap = SugarCube.State.current.variables.cap; // eg. 18.565689316967042
 			const eu = SugarCube.State.current.variables.eu; // eg. 2.5
-			const bedcal = 10 * (cap/2) - eu; // eg. 90.3284465848352
+			const bedcal = 5 * cap - eu; // eg. 90.3284465848352
 			// fridge stuff option is 400 cal flat rate
 			if (maxFridgeCal() <= bedcal)
 				elem.click();
@@ -84,7 +87,7 @@ function ai(){
 		// Explore!
 		else if (elem = linkExists('Leave Room'))
 			elem.click();
-		else if (elem = linkExists('Wander around the Lab'))
+		else if (elem = linkExists('Wander around the Lab')) // burns eu*2 cals but unlocks options
 			elem.click();
 		else if (elem = linkExists('Tell her your name'))
 			elem.click();

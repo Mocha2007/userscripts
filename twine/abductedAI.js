@@ -102,6 +102,12 @@ function ai(){
 		// Explore!
 		else if (elem = linkExists('Leave Room'))
 			elem.click();
+		// Explore! (chapter 2)
+		else if (elem = linkExists('Take a look inside'))
+			elem.click();
+		else if (elem = linkExists('Wander around in Residential and Recreation'))
+			elem.click();
+		// Explore! (chapter 1)
 		else if (elem = linkExists('Wander around the Lab')) // burns eu*2 cals but unlocks options
 			elem.click();
 		else if (elem = linkExists('Tell her your name'))
@@ -132,7 +138,7 @@ function ai(){
 		// Bedroom if no other options available today
 		else if (elem = linkExists('Go to bed')){
 			elem.click();
-			cafeRejectedToday = eatenToday = weighedToday = false;
+			abbi = cafeRejectedToday = eatenToday = weighedToday = false;
 		}
 		// new game
 		else if (elem = linkExists('Female'))

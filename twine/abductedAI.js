@@ -1,5 +1,6 @@
 // Abducted
 function ai(){
+	// SugarCube.State.current
 	const t = 200; // ms; need time for the game to process clicks
 	let cafeRejectedToday = eatenToday = weighedToday = false;
 	function linkExists(s){
@@ -17,6 +18,16 @@ function ai(){
 		clearInterval(interval);
 		console.error('unknown event; handing control back to player');
 		debugger;
+	}
+	function maxFridgeCal(){
+		const cap = SugarCube.State.current.variables.cap;
+		if (32 <= cap)
+			return 400;
+		// 8 pastries + some sandwiches
+		if (cap <= 12.8)
+			return 20 * Math.ceil((1.25*(x-12.8))/3) + 240;
+		// some pastries
+		return 30 * Math.ceil(1.25*cap/2);
 	}
 	function mainLoop(){
 		let elem;
@@ -48,6 +59,19 @@ function ai(){
 					halt();
 			}
 		}
+		else if (elem = linkExists('Spend the rest of the day in bed')){
+			// we need to determine if this is the best option
+			//set $cal to 10*($cap/2) - $eu
+			const cap = SugarCube.State.current.variables.cap; // eg. 18.565689316967042
+			const eu = SugarCube.State.current.variables.eu; // eg. 2.5
+			const bedcal = 10 * (cap/2) - eu; // eg. 90.3284465848352
+			// fridge stuff option is 400 cal flat rate
+			if (maxFridgeCal() <= bedcal)
+				elem.click();
+			else
+				linkExists('Get out of bed').click();
+			// set $lbs += ($cal-15-($eu*$eu))/35
+		}
 		// Bathroom
 		else if (!weighedToday && (elem = linkExists('Enter Bathroom')))
 			elem.click();
@@ -77,7 +101,11 @@ function ai(){
 		// Kitchen
 		else if (!eatenToday && (elem = linkExists('Check Stasis Fridge')))
 			elem.click();
-		else if (elem = linkExists('Eat Pastry')) // 15 cal/full
+		else if (elem = linkExists('Stuff yourself')) // 10 cal/full, 400 cal flat rate
+			elem.click();
+		else if (elem = linkExists('Eat Pastry')) // 15 cal/full, 240 cal max
+			elem.click();
+		else if (elem = linkExists('Have a Sandwich')) // 6.6r cal/full, 160 cal max
 			elem.click();
 		else if (elem = linkExists('Close Stasis Fridge')){
 			elem.click();

@@ -127,6 +127,11 @@ function ai(){
 			elem.click();
 		else if (elem = linkExists('What do you want from me?'))
 			elem.click();
+		// phase 2
+		else if (elem = linkExists('Move forward with the Treatment'))
+			elem.click();
+		else if (elem = linkExists('Your body has already'))
+			elem.click();
 		// unknown event
 		else
 			halt();

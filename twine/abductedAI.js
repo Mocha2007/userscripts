@@ -13,6 +13,11 @@ function ai(){
 			.filter(e => !badChoices.includes(e.innerHTML));
 		return choices.length === 1 ? choices[0] : false;
 	}
+	function halt(){
+		clearInterval(interval);
+		console.error('unknown event; handing control back to player');
+		debugger;
+	}
 	function mainLoop(){
 		let elem;
 		// main gameplay
@@ -25,6 +30,16 @@ function ai(){
 			}
 			elem.click();
 		}
+		else if (elem = linkExists('Yes')){
+			const no = linkExists('No');
+			// hold on we need to figure out what we're agreeing to...
+			switch (elem.parent.id){
+				case 'passage-wander-around':
+					elem.click();
+					break;
+				default:
+					halt();
+		}
 		// Bathroom
 		else if (!weighedToday && (elem = linkExists('Enter Bathroom'))
 			elem.click();
@@ -33,6 +48,15 @@ function ai(){
 			weighedToday = true;
 		}
 		else if (elem = linkExists('Leave Bathroom')
+			elem.click();
+		// Explore!
+		else if (elem = linkExists('Leave Room')
+			elem.click();
+		else if (elem = linkExists('Wander around the Lab')
+			elem.click();
+		else if (elem = linkExists('Knock on the door')
+			elem.click();
+		else if (elem = linkExists('Return to your room') // tired
 			elem.click();
 		// Kitchen
 		else if (!eatenToday && (elem = linkExists('Check Stasis Fridge'))
@@ -60,11 +84,8 @@ function ai(){
 		else if (elem = linkExists('What do you want from me?'))
 			elem.click();
 		// unknown event
-		else {
-			clearInterval(interval);
-			console.error('unknown event; handing control back to player');
-			debugger;
-		}
+		else
+			halt();
 	}
 	const interval = setInterval(mainLoop, t);
 }

@@ -2,7 +2,7 @@
 function ai(){
 	// SugarCube.State.current
 	const t = 200; // ms; need time for the game to process clicks
-	let abbi = cafeRejectedToday = eatenToday = weighedToday = false;
+	let abbi = cafeRejectedToday = eatenToday = weighedToday = secCBU = false;
 	function linkExists(s){
 		return Array.from(document.getElementsByClassName('link-internal'))
 			.find(e => e.innerHTML.includes(s));
@@ -99,8 +99,38 @@ function ai(){
 			elem.click();
 			abbi = true;
 		}
+		else if (elem = linkExists('Chat with ABBI'))
+			elem.click();
+		else if (elem = linkExists('Get a better look at the purple liquid'))
+			elem.click();
+		else if (elem = linkExists('Drink the purple liquid'))
+			elem.click();
+		else if (elem = linkExists('Try and open the door'))
+			elem.click();
+		else if (!secCBU && (elem = linkExists('Terminal')))
+			elem.click();
+		else if (elem = linkExists('Unlock Security Corridor B'))
+			elem.click();
+		else if (elem = linkExists('Step away from terminal')){
+			elem.click();
+			secCBU = true;
+		}
+		else if (elem = linkExists('Computer (One-Way)'))
+			elem.click();
+		// priority: N = W = E > S
+		else if (!secCBU && (elem = linkExists('North:')))
+			elem.click();
+		else if (!secCBU && (elem = linkExists('West:')))
+			elem.click();
+		else if (secCBU && (elem = linkExists('East:')))
+			elem.click();
+		else if (secCBU && (elem = linkExists('South:')))
+			elem.click();
 		// Explore!
 		else if (elem = linkExists('Leave Room'))
+			elem.click();
+		// Explore! (chapter 3)
+		else if (elem = linkExists('Wander around the Facility\'s surrounding forest'))
 			elem.click();
 		// Explore! (chapter 2)
 		else if (elem = linkExists('Take a look inside'))
@@ -157,6 +187,12 @@ function ai(){
 		else if (elem = linkExists('Your body has already'))
 			elem.click();
 		else if (elem = linkExists('Help out'))
+			elem.click();
+		// Chapter 0
+		else if (elem = linkExists('Go to work'))
+			elem.click();
+		// Chapter 3
+		else if (elem = linkExists('break down'))
 			elem.click();
 		// unknown event
 		else

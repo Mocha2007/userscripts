@@ -39,36 +39,37 @@ function ai(){
 					break;
 				default:
 					halt();
+			}
 		}
 		// Bathroom
-		else if (!weighedToday && (elem = linkExists('Enter Bathroom'))
+		else if (!weighedToday && (elem = linkExists('Enter Bathroom')))
 			elem.click();
-		else if (!weighedToday && (elem = linkExists('Step onto scale')){
+		else if (!weighedToday && (elem = linkExists('Step onto scale'))){
 			elem.click();
 			weighedToday = true;
 		}
-		else if (elem = linkExists('Leave Bathroom')
+		else if (elem = linkExists('Leave Bathroom'))
 			elem.click();
 		// Explore!
-		else if (elem = linkExists('Leave Room')
+		else if (elem = linkExists('Leave Room'))
 			elem.click();
-		else if (elem = linkExists('Wander around the Lab')
+		else if (elem = linkExists('Wander around the Lab'))
 			elem.click();
-		else if (elem = linkExists('Knock on the door')
+		else if (elem = linkExists('Knock on the door'))
 			elem.click();
-		else if (elem = linkExists('Return to your room') // tired
+		else if (elem = linkExists('Return to your room')) // tired
 			elem.click();
 		// Kitchen
-		else if (!eatenToday && (elem = linkExists('Check Stasis Fridge'))
+		else if (!eatenToday && (elem = linkExists('Check Stasis Fridge')))
 			elem.click();
-		else if (elem = linkExists('Eat Pastry') // 15 cal/full
+		else if (elem = linkExists('Eat Pastry')) // 15 cal/full
 			elem.click();
-		else if (elem = linkExists('Close Stasis Fridge'){
+		else if (elem = linkExists('Close Stasis Fridge')){
 			elem.click();
 			eatenToday = true;
 		}
 		// Bedroom if no other options available today
-		else if (elem = linkExists('Go to bed'){
+		else if (elem = linkExists('Go to bed')){
 			elem.click();
 			eatenToday = weighedToday = false;
 		}

@@ -136,6 +136,12 @@ function ai(){
 			elem.click();
 		else if (elem = linkExists('Stand your ground')) // treant feeding
 			elem.click();
+		else if (elem = linkExists('Venture into the grove'))
+			elem.click();
+		else if (elem = linkExists('Keep moving'))
+			elem.click();
+		else if (elem = linkExists('Drink deeper of the Wellspring'))
+			elem.click();
 		// NOT WORTH IT: eating the fruit: 1/3 change of 6.6r food, 1/6 chance of 33.3r food, 1/3 chance of basically nothing, 1/6 chance of cap malus
 		// Explore! (chapter 2)
 		else if (elem = linkExists('Take a look inside'))

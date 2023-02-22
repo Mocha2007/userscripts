@@ -62,6 +62,10 @@ function ai(){
 			elem.click();
 		else if (elem = linkExists('Wander around the Lab'))
 			elem.click();
+		else if (elem = linkExists('Tell her your name'))
+			elem.click();
+		else if (elem = linkExists('Visit Doctor Halessie\'s office')) // do this if available
+			elem.click();
 		else if (!cafeRejectedToday && (elem = linkExists('Knock on the door')))
 			elem.click();
 		else if (!cafeRejectedToday && (elem = linkExists('Attempt to order a meal')))

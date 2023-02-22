@@ -82,6 +82,10 @@ function ai(){
 			elem.click();
 			weighedToday = true;
 		}
+		/*
+		else if (elem = linkExists('Use shower')) // abbi feeding event?
+			elem.click();
+		*/
 		else if (elem = linkExists('Leave Bathroom'))
 			elem.click();
 		// OwO WHAT'S THIS???
@@ -135,6 +139,8 @@ function ai(){
 		else if (elem = linkExists('Approach the creature'))
 			elem.click();
 		else if (elem = linkExists('Stand your ground')) // treant feeding
+			elem.click();
+		else if (elem = linkExists('Meet with the treant')) // treant feeding
 			elem.click();
 		else if (elem = linkExists('Venture into the grove'))
 			elem.click();

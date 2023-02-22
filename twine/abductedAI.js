@@ -1,7 +1,7 @@
 // Abducted
 function ai(){
 	const t = 200; // ms; need time for the game to process clicks
-	let eatenToday = weighedToday = false;
+	let cafeRejectedToday = eatenToday = weighedToday = false;
 	function linkExists(s){
 		return Array.from(document.getElementsByClassName('link-internal'))
 			.find(e => e.innerHTML.includes(s));
@@ -22,18 +22,25 @@ function ai(){
 		let elem;
 		// main gameplay
 		if (elem = onlyOption()){
-			if (elem.innerHTML === 'Continue'){
-				// name selector
-				const nameElem = document.getElementById('textbox-name');
-				if (nameElem)
-					nameElem.value = 'Luna';
+			switch(elem.innerHTML){
+				case 'Continue':
+					// name selector?
+					const nameElem = document.getElementById('textbox-name');
+					if (nameElem)
+						nameElem.value = 'Luna';
+					break;
+				case 'Dang...':
+					cafeRejectedToday = true;
+					break;
 			}
 			elem.click();
 		}
 		else if (elem = linkExists('Yes')){
+			const parent = Array.from(document.body.getElementsByTagName("*"))
+				.find(e => Array.from(e.children).includes(elem));
 			const no = linkExists('No');
 			// hold on we need to figure out what we're agreeing to...
-			switch (elem.parent.id){
+			switch (parent.id){
 				case 'passage-wander-around':
 					elem.click();
 					break;
@@ -55,7 +62,11 @@ function ai(){
 			elem.click();
 		else if (elem = linkExists('Wander around the Lab'))
 			elem.click();
-		else if (elem = linkExists('Knock on the door'))
+		else if (!cafeRejectedToday && (elem = linkExists('Knock on the door')))
+			elem.click();
+		else if (!cafeRejectedToday && (elem = linkExists('Attempt to order a meal')))
+			elem.click();
+		else if (elem = linkExists('Leave'))
 			elem.click();
 		else if (elem = linkExists('Return to your room')) // tired
 			elem.click();
@@ -71,7 +82,7 @@ function ai(){
 		// Bedroom if no other options available today
 		else if (elem = linkExists('Go to bed')){
 			elem.click();
-			eatenToday = weighedToday = false;
+			cafeRejectedToday = eatenToday = weighedToday = false;
 		}
 		// new game
 		else if (elem = linkExists('Female'))

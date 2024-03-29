@@ -1,7 +1,9 @@
 // ==UserScript==
 // @name     A Tale of Crowns Script
+// @author   Mocha2007
+// @description this shit is broken yo
 // @version  1
-// @grant    none
+// @include  https://html-classic.itch.zone/html/9459257/A Tale of Crowns/index.html
 // ==/UserScript==
 console.info("Luna's AToC Script");
 
@@ -15,6 +17,7 @@ const GIRLCOLORS = [
 
 const LUNA_ON_TICK = () => {
   console.info("LunaButton");
+  console.info(Array.from(document.getElementsByClassName('passage')));
   Array.from(document.getElementsByClassName('passage')).forEach(PASSAGE => {
   	console.info("PASSAGE", PASSAGE);
   	console.info("PASSAGE.childNodes", PASSAGE.childNodes);

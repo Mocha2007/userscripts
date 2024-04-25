@@ -125,20 +125,32 @@ def e2024(n = 100000):
         'R': 0,
         'Tie': 0,
     }
+    TIES = []
     def test() -> str:
         CURR = {
             'D': 0,
             'R': 0,
         }
+        STATES = {}
         for state, p in STATE_ODDS.items():
-            CURR['DR'[random() < p]] += STATE_EV[state]
+            victor = 'DR'[random() < p]
+            CURR[victor] += STATE_EV[state]
+            if p % 1:
+                STATES[state] = victor
         if CURR['D'] < CURR['R']:
             return 'R'
         if CURR['R'] < CURR['D']:
             return 'D'
+        # else tie
+        TIES.append(STATES)
         return 'Tie'
     
     for _ in range(n):
         WINS[test()] += 1
     
-    return WINS
+    return WINS, TIES
+
+def FORMAT_TIE(TIES) -> str:
+    HEADERS = '\t'.join(TIES[0].keys())
+    VALUES = '\n'.join(map(lambda TIE: '\t'.join(TIE.values()), TIES))
+    return HEADERS + '\n' + VALUES

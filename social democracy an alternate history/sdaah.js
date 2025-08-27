@@ -12,6 +12,8 @@ function make_the_nazis_commies(p = 1.0){
 }
 
 function insta_left_coalition(){
-	dendryUI.dendryEngine.state.qualities.classes.forEach(s => dendryUI.dendryEngine.state.qualities[s + "_kpd"] *= 50);
+	["spd", "kpd"].forEach(p => dendryUI.dendryEngine.state.qualities.classes.forEach(s => dendryUI.dendryEngine.state.qualities[s + "_" + p] *= 2.2));
 	dendryUI.dendryEngine.state.qualities.kpd_relation = 100;
+	dendryUI.dendryEngine.state.qualities.communist_coalition = 100; // unsure how high this needs to be...
+	dendryUI.dendryEngine.state.qualities.kpd_cooperation_seen = 1;
 }

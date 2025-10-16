@@ -9,6 +9,13 @@ class Option {
 	and_then(f){
 		return this.is_none() ? this : f(this.inside); // ?
 	}
+	/** @param {string} msg */
+	expect(msg){
+		if (this.is_none()){
+			throw msg || 'unwrap on None';
+		}
+		return this.inside;
+	}
 	/** @returns {Option} */
 	filter(predicate){
 		return this.is_none() ? this : predicate(this.inside) ? this : None;

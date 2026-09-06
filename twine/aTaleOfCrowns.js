@@ -30,7 +30,7 @@ const LUNA_ON_TICK = () => {
         PSTRING = PSTRING.replaceAll(NAME, `<b style='color:${COLOR}>${NAME}</b>`);
       });
 
-      textNode.wholeText = PSTRING;
+      textNode.nodeValue = PSTRING;
     });
   });
 };

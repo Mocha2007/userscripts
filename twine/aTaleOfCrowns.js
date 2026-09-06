@@ -23,11 +23,11 @@ const LUNA_ON_TICK = () => {
   	console.info("PASSAGE.childNodes", PASSAGE.childNodes);
     Array.from(PASSAGE.childNodes).filter(node => node.nodeType === Node.TEXT_NODE).forEach(textNode => {
       let PSTRING = textNode.wholeText
-        .replace(/\bperi/g, 'peni');
+        .replaceAll(/\bperi/g, 'peni');
 
       GIRLCOLORS.forEach(pair => {
         const [NAME, COLOR] = pair;
-        PSTRING = PSTRING.replace(NAME, `<b style='color:${COLOR}>${NAME}</b>`);
+        PSTRING = PSTRING.replaceAll(NAME, `<b style='color:${COLOR}>${NAME}</b>`);
       });
 
       textNode.wholeText = PSTRING;
